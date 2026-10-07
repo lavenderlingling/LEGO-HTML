@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>樂高® 台灣官方線上商店復刻版 | LEGO® Shop TW</title>
+  
+  <style>
+    /* ==========================================================
+       【自訂調整指南 - 顏色與間距】
+       若需要更換品牌主色或調整頁面上下間距，請直接修改下方的 :root 變數：
+       1. 顏色：修改 --lego-red, --lego-yellow, --bg-page 等色彩代碼。
+       2. 間距：修改 --section-gap (區塊上下留白)、--content-max-w (最大寬度)。
+       ========================================================== */
+    :root {
+      /* 核心品牌色系 */
+      --lego-red: #E3000B;          /* 經典樂高紅：用於標誌、強調按鈕與特惠標籤 */
+      --lego-yellow: #FFD000;       /* 樂高經典黃：用於輔助高亮與特別徽章 */
+      --lego-blue: #006DB7;         /* 樂高藍：用於會員福利與輔助區塊 */
+      --lego-dark: #202020;         /* 深灰色：用於標題、頁尾與主要文字 */
+      --lego-green: #00853D;        /* 綠色：用於庫存提示與促銷標示 */
+      
+      /* 背景與版面顏色 */
+      --bg-page: #F6F6F6;           /* 全站主背景色（淺灰底能突顯商品卡片） */
+      --bg-card: #FFFFFF;           /* 白色卡片底色 */
+      --border-color: #E2E2E2;      /* 邊框分界線色 */
+      --text-main: #202020;         /* 內文主要文字色 */
+      --text-muted: #666666;        /* 次要說明文字色 */
+      
+      /* 版面與區塊間距設定 (可在此統一縮放全站間距) */
+      --content-max-w: 1280px;      /* 內容居中最大寬度 */
+      --section-gap: 60px;          /* 每個大區塊之間的上下間距 (可依喜好調整，如 40px 或 80px) */
+      --container-pad: 24px;        /* 容器兩側內縮 padding */
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-full: 999px;
+      
+      /* 動畫速度 */
+      --transition-fast: 0.2s ease;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+      --shadow-hover: 0 14px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+      outline: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .container {
+      max-width: var(--content-max-w);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+    }
+
+    .promo-bar {
+      background-color: var(--lego-dark);
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      padding: 9px 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .promo-bar strong {
+      color: var(--lego-yellow);
+    }
+
+    .site-header {
+      background-color: #FFFFFF;
+      border-bottom: 2px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    /* 樂高經典方塊 LOGO */
+    .lego-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 58px;
+      height: 58px;
+      background: var(--lego-red);
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 19px;
+      border-radius: var(--radius-sm);
+      box-shadow: inset -2px -2px 0 rgba(0,0,0,0.25), inset 2px 2px 0 rgba(255,255,255,0.4);
+      letter-spacing: -1px;
+      user-select: none;
+      transition: transform var(--transition-fast);
+    }
+
+    .lego-logo:hover {
+      transform: scale(1.04);
+    }
+
+    .logo-text-box {
+      border: 3px solid #FFFFFF;
+      background-color: var(--lego-red);
+      padding: 0 4px;
+      color: var(--lego-yellow);
+      text-shadow: 2px 2px 0 #000000;
+      font-style: italic;
+    }
+
+    /* 主選單項目 */
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .nav-links li a {
+      padding: 8px 4px;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links li a:hover {
+      color: var(--lego-red);
+    }
+
+    .nav-links li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--lego-red);
+      transition: width var(--transition-fast);
+      border-radius: 2px;
+    }
+
+    .nav-links li a:hover::after {
+      width: 100%;
+    }
+
+    /* 搜尋欄與功能選單 */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-input {
+      padding: 10px 18px 10px 38px;
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-full);
+      font-size: 14px;
+      width: 210px;
+      background-color: #F8F8F8;
+      transition: all var(--transition-fast);
+    }
+
+    .search-input:focus {
+      outline: none;
+      background-color: #FFFFFF;
+      border-color: var(--lego-red);
+      width: 250px;
+      box-shadow: 0 0 0 3px rgba(227, 0, 11, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      width: 18px;
+      height: 18px;
+      fill: #888888;
+      pointer-events: none;
+    }
+
+    .action-btn {
+      background: transparent;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      position: relative;
+      transition: background var(--transition-fast);
+    }
+
+    .action-btn:hover {
+      background-color: #ECECEC;
+    }
+
+    .action-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--text-main);
+    }
+
+    .badge-count {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: var(--lego-red);
+      color: #FFFFFF;
+      font-size: 11px;
+      font-weight: 800;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-section {
+      margin-top: 24px;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #1B2A4A 0%, #0F172A 100%);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+      min-height: 440px;
+      color: #FFFFFF;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-content {
+      flex: 1;
+      padding: 48px;
+      z-index: 2;
+      max-width: 580px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background-color: var(--lego-yellow);
+      color: var(--lego-dark);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: #D1D5DB;
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .hero-btn-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* 經典實心按鈕 */
+    .btn-primary {
+      background-color: var(--lego-red);
+      color: #FFFFFF;
+      padding: 14px 30px;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all var(--transition-fast);
+      box-shadow: 0 4px 12px rgba(227, 0, 11, 0.35);
+    }
+
+    .btn-primary:hover {
+      background-color: #BE0009;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(227, 0, 11, 0.45);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      color: #FFFFFF;
+      padding: 14px 28px;
+      font-weight: 700;
+      font-size: 15px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all var(--transition-fast);
+    }
+
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .hero-graphic {
+      flex: 1;
+      height: 100%;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .brick-art-container {
+      width: 320px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(255,208,0,0.15) 0%, rgba(255,255,255,0) 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: floatArt 4s ease-in-out infinite;
+    }
+
+    @keyframes floatArt {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+    }
+
+    .section-spacing {
+      margin-top: var(--section-gap); /* 透過 CSS 變數統一調整區塊間隔 */
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 24px;
+      background: var(--lego-red);
+      border-radius: 4px;
+    }
+
+    .view-all-link {
+      color: var(--lego-blue);
+      font-weight: 700;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color var(--transition-fast);
+    }
+
+    .view-all-link:hover {
+      text-decoration: underline;
+      color: var(--lego-red);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--lego-yellow);
+    }
+
+    .cat-icon-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .category-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background-color: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: #D0D0D0;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background-color: var(--lego-yellow);
+      color: var(--lego-dark);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+      text-transform: uppercase;
+      z-index: 5;
+    }
+
+    .card-badge.badge-red {
+      background-color: var(--lego-red);
+      color: #FFFFFF;
+    }
+
+    .card-fav-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      transition: background var(--transition-fast);
+    }
+
+    .card-fav-btn:hover {
+      background: #FFFFFF;
+    }
+
+    .card-fav-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: #666;
+      stroke-width: 2;
+      transition: stroke var(--transition-fast), fill var(--transition-fast);
+    }
+
+    .card-fav-btn.active svg {
+      stroke: var(--lego-red);
+      fill: var(--lego-red);
+    }
+
+    .product-img-wrapper {
+      height: 210px;
+      background-color: #FAFAFA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid #EFEFEF;
+    }
+
+    .brick-set-svg {
+      width: 170px;
+      height: 150px;
+      filter: drop-shadow(0 12px 16px rgba(0,0,0,0.12));
+      transition: transform var(--transition-fast);
+    }
+
+    .product-card:hover .brick-set-svg {
+      transform: scale(1.06);
+    }
+
+    .product-info {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .product-meta-tags {
+      display: flex;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .product-name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 8px;
+      color: var(--text-main);
+      min-height: 44px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      color: #777777;
+      margin-bottom: 14px;
+    }
+
+    .stars {
+      color: #FFB800;
+      font-size: 14px;
+    }
+
+    .product-price-row {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .product-price {
+      font-size: 19px;
+      font-weight: 800;
+      color: var(--lego-dark);
+    }
+
+    .btn-add-cart {
+      background-color: var(--lego-yellow);
+      color: var(--lego-dark);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: var(--radius-full);
+      transition: all var(--transition-fast);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn-add-cart:hover {
+      background-color: #E6BC00;
+      transform: translateY(-1px);
+    }
+
+    .features-strip {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1px solid var(--border-color);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .feature-icon-box {
+      width: 48px;
+      height: 48px;
+      background-color: #FFF9D6;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .feature-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .feature-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .insiders-banner {
+      background: linear-gradient(100deg, var(--lego-blue) 0%, #004576 100%);
+      border-radius: var(--radius-md);
+      color: #FFFFFF;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: var(--section-gap);
+    }
+
+    .insiders-left h3 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .insiders-tag {
+      background: var(--lego-yellow);
+      color: var(--lego-dark);
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+    }
+
+    .insiders-left p {
+      color: #E2E8F0;
+      font-size: 15px;
+      max-width: 580px;
+    }
+
+    .site-footer {
+      background-color: var(--lego-dark);
+      color: #FFFFFF;
+      padding-top: 50px;
+      padding-bottom: 40px;
+      margin-top: var(--section-gap);
+      border-top: 4px solid var(--lego-yellow);
+    }
+
+    .footer-columns {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand h4 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--lego-yellow);
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: #A0A0A0;
+      line-height: 1.6;
+      max-width: 320px;
+    }
+
+    .footer-col h5 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #FFFFFF;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 13px;
+      color: #A0A0A0;
+      transition: color var(--transition-fast);
+    }
+
+    .footer-col ul li a:hover {
+      color: #FFFFFF;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #333333;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #777777;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .toast-box {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background-color: var(--lego-dark);
+      color: #FFFFFF;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      border-left: 5px solid var(--lego-yellow);
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 999;
+      transform: translateY(120%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .toast-box.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      .header-main {
+        height: 64px;
+      }
+      .nav-links {
+        display: none; /* 平板及手機先收折主選單以確保版面精簡 */
+      }
+      .search-input {
+        width: 140px;
+      }
+      .search-input:focus {
+        width: 180px;
+      }
+      .hero-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-content {
+        padding: 36px 20px;
+      }
+      .hero-title {
+        font-size: 30px;
+      }
+      .hero-btn-group {
+        justify-content: center;
+      }
+      .hero-graphic {
+        min-height: 240px;
+      }
+      .footer-columns {
+        grid-template-columns: 1fr 1fr;
+      }
+      .insiders-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-columns {
+        grid-template-columns: 1fr;
+      }
+      .promo-bar {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="promo-bar" aria-label="促銷資訊">
+    <span>全館滿 NT$1,800 即享 <strong>免運費優惠</strong></span>
+    <span>•</span>
+    <span>加入 LEGO® Insiders 累積點數兌換專屬限量積木！</span>
+  </aside>
+
+  <header class="site-header">
+    <div class="container header-main">
+      <!-- 經典樂高 LOGO 磚塊造型 -->
+      <a href="#" class="lego-logo" aria-label="LEGO 首頁">
+        <div class="logo-text-box">LEGO</div>
+      </a>
+
+      <!-- 核心選單：點擊跳轉或篩選類別 -->
+      <nav aria-label="主要選單">
+        <ul class="nav-links">
+          <li><a href="#themes">主題系列</a></li>
+          <li><a href="#featured">熱門推薦</a></li>
+          <li><a href="#offers">促銷優惠</a></li>
+          <li><a href="#insiders">會員專區</a></li>
+          <li><a href="#discover">發現靈感</a></li>
+        </ul>
+      </nav>
+
+      <!-- 搜尋列與購物車狀態 -->
+      <div class="header-actions">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+          </svg>
+          <input type="text" class="search-input" placeholder="搜尋樂高商品..." aria-label="搜尋商品">
+        </div>
+
+        <!-- 收藏清單按鈕 -->
+        <button class="action-btn" aria-label="願望清單" onclick="showToast('已開啟收藏清單')">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <!-- 購物袋按鈕 -->
+        <button class="action-btn" aria-label="購物車" onclick="showToast('目前購物袋有 1 件精選商品')">
+          <svg viewBox="0 0 24 24">
+            <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/>
+          </svg>
+          <span class="badge-count" id="cart-counter">1</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero-section">
+      <div class="hero-banner">
+        <div class="hero-content">
+          <span class="hero-badge">2026 全新重磅鉅獻</span>
+          <!-- 【可修改標題】此處為首頁大看板主標題 -->
+          <h1 class="hero-title">探索宇宙無限想像力</h1>
+          <!-- 【可修改說明】此處為大看板副標題敘述 -->
+          <p class="hero-desc">
+            全新樂高® 太空探測系列現已登場！親手拼砌精密航太儀器、漫步異星地貌，啟發大小玩家對銀河冒險的無限憧憬。
+          </p>
+          <div class="hero-btn-group">
+            <a href="#featured" class="btn-primary">立即探索套裝</a>
+            <a href="#themes" class="btn-secondary">瀏覽主題系列</a>
+          </div>
+        </div>
+
+        <div class="hero-graphic" aria-hidden="true">
+          <!-- 樂高積木視覺 SVG (純向量幾何繪製，無需外鏈圖檔) -->
+          <div class="brick-art-container">
+            <svg class="brick-set-svg" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- 太空梭機身與積木幾何構建 -->
+              <rect x="80" y="40" width="80" height="120" rx="8" fill="#E3000B"/>
+              <!-- 積木凸點 Studs -->
+              <circle cx="100" cy="55" r="10" fill="#FF4D4D"/>
+              <circle cx="140" cy="55" r="10" fill="#FF4D4D"/>
+              <circle cx="100" cy="85" r="10" fill="#FF4D4D"/>
+              <circle cx="140" cy="85" r="10" fill="#FF4D4D"/>
+              <circle cx="100" cy="115" r="10" fill="#FF4D4D"/>
+              <circle cx="140" cy="115" r="10" fill="#FF4D4D"/>
+              <!-- 機翼 -->
+              <polygon points="80,80 30,140 80,140" fill="#006DB7"/>
+              <polygon points="160,80 210,140 160,140" fill="#006DB7"/>
+              <!-- 機頭與推進器 -->
+              <polygon points="80,40 120,10 160,40" fill="#FFD000"/>
+              <rect x="95" y="160" width="20" height="18" rx="3" fill="#333333"/>
+              <rect x="125" y="160" width="20" height="18" rx="3" fill="#333333"/>
+              <!-- 噴射火焰 -->
+              <polygon points="105,178 95,200 115,190" fill="#FF8800"/>
+              <polygon points="135,178 125,200 145,190" fill="#FF8800"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-spacing" id="themes">
+      <div class="section-head">
+        <!-- 【可修改標題】主題導覽區塊 -->
+        <h2 class="section-title">熱門主題系列</h2>
+        <a href="#" class="view-all-link">檢視所有系列 →</a>
+      </div>
+
+      <div class="category-grid">
+        <div class="category-card" onclick="showToast('已選擇：星際大戰 Star Wars 系列')">
+          <div class="cat-icon-circle" style="background:#FFEAEA;">🚀</div>
+          <span class="category-name">星際大戰™</span>
+        </div>
+        <div class="category-card" onclick="showToast('已選擇：花藝植物 Botanical 系列')">
+          <div class="cat-icon-circle" style="background:#EBF9EE;">🌸</div>
+          <span class="category-name">花藝植物</span>
+        </div>
+        <div class="category-card" onclick="showToast('已選擇：科技機械 Technic 系列')">
+          <div class="cat-icon-circle" style="background:#E6F2FB;">🏎️</div>
+          <span class="category-name">科技系列</span>
+        </div>
+        <div class="category-card" onclick="showToast('已選擇：城市系列 City 系列')">
+          <div class="cat-icon-circle" style="background:#FFF6D6;">🚒</div>
+          <span class="category-name">樂高® 城市</span>
+        </div>
+        <div class="category-card" onclick="showToast('已選擇：地標建築 Architecture 系列')">
+          <div class="cat-icon-circle" style="background:#F0EEF8;">🏛️</div>
+          <span class="category-name">地標建築</span>
+        </div>
+        <div class="category-card" onclick="showToast('已選擇：經典顆粒 Classic 系列')">
+          <div class="cat-icon-circle" style="background:#FFEFE6;">🧱</div>
+          <span class="category-name">經典顆粒盒</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-spacing" id="featured">
+      <div class="section-head">
+        <!-- 【可修改標題】熱門商品區塊標題 -->
+        <h2 class="section-title">本週熱賣新品推薦</h2>
+        <a href="#" class="view-all-link">更多新品 →</a>
+      </div>
+
+      <div class="product-grid">
+        <!-- 商品 1: 繁花盆栽 -->
+        <article class="product-card">
+          <span class="card-badge badge-red">熱賣新品</span>
+          <button class="card-fav-btn" aria-label="收藏商品" onclick="toggleFav(this)">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+          
+          <div class="product-img-wrapper">
+            <svg class="brick-set-svg" viewBox="0 0 160 140">
+              <!-- 花瓶與植物積木象徵圖形 -->
+              <rect x="50" y="80" width="60" height="50" rx="6" fill="#8B5A2B"/>
+              <circle cx="80" cy="50" r="28" fill="#E83E8C"/>
+              <circle cx="60" cy="40" r="14" fill="#FFC107"/>
+              <circle cx="100" cy="40" r="14" fill="#FFC107"/>
+              <circle cx="80" cy="50" r="12" fill="#FFFFFF"/>
+              <rect x="76" y="70" width="8" height="15" fill="#28A745"/>
+            </svg>
+          </div>
+
+          <div class="product-info">
+            <div class="product-meta-tags">
+              <span>18+</span> • <span>758 件顆粒</span>
+            </div>
+            <h3 class="product-name">樂高® 植物收藏：野花花束套裝</h3>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span>(142)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="product-price">NT$ 1,999</span>
+              <button class="btn-add-cart" onclick="addToCart('野花花束套裝', 1999)">加入購物袋</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 商品 2: 科技超跑 -->
+        <article class="product-card">
+          <span class="card-badge">官方獨家</span>
+          <button class="card-fav-btn" aria-label="收藏商品" onclick="toggleFav(this)">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+          
+          <div class="product-img-wrapper">
+            <svg class="brick-set-svg" viewBox="0 0 160 140">
+              <!-- 超跑科技輪廓積木圖形 -->
+              <rect x="25" y="75" width="110" height="30" rx="8" fill="#E3000B"/>
+              <polygon points="45,75 65,45 105,45 125,75" fill="#1C1C1C"/>
+              <circle cx="45" cy="105" r="14" fill="#333333"/>
+              <circle cx="45" cy="105" r="6" fill="#CCCCCC"/>
+              <circle cx="115" cy="105" r="14" fill="#333333"/>
+              <circle cx="115" cy="105" r="6" fill="#CCCCCC"/>
+              <rect x="15" y="80" width="10" height="6" rx="2" fill="#FFD000"/>
+            </svg>
+          </div>
+
+          <div class="product-info">
+            <div class="product-meta-tags">
+              <span>18+</span> • <span>1,466 件顆粒</span>
+            </div>
+            <h3 class="product-name">Technic™ 終極極速巡航旗艦跑車</h3>
+            <div class="product-rating">
+              <span class="stars">★★★★☆</span>
+              <span>(89)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="product-price">NT$ 5,499</span>
+              <button class="btn-add-cart" onclick="addToCart('終極極速巡航跑車', 5499)">加入購物袋</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 商品 3: 城堡探險系列 -->
+        <article class="product-card">
+          <span class="card-badge">經典復刻</span>
+          <button class="card-fav-btn" aria-label="收藏商品" onclick="toggleFav(this)">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+          
+          <div class="product-img-wrapper">
+            <svg class="brick-set-svg" viewBox="0 0 160 140">
+              <!-- 中世紀古堡積木圖形 -->
+              <rect x="40" y="55" width="80" height="65" fill="#7F8C8D"/>
+              <rect x="30" y="40" width="25" height="80" fill="#95A5A6"/>
+              <rect x="105" y="40" width="25" height="80" fill="#95A5A6"/>
+              <polygon points="42,15 30,40 55,40" fill="#006DB7"/>
+              <polygon points="117,15 105,40 130,40" fill="#006DB7"/>
+              <rect x="70" y="85" width="20" height="35" rx="10" fill="#5D4037"/>
+            </svg>
+          </div>
+
+          <div class="product-info">
+            <div class="product-meta-tags">
+              <span>9+</span> • <span>1,222 件顆粒</span>
+            </div>
+            <h3 class="product-name">樂高® 騎士王國：高聳傳奇古堡</h3>
+            <div class="product-rating">
+              <span class="stars">★★★★★</span>
+              <span>(210)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="product-price">NT$ 3,699</span>
+              <button class="btn-add-cart" onclick="addToCart('騎士王國傳奇古堡', 3699)">加入購物袋</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- 商品 4: 太空漫遊基地 -->
+        <article class="product-card">
+          <span class="card-badge badge-red">贈品合資格</span>
+          <button class="card-fav-btn" aria-label="收藏商品" onclick="toggleFav(this)">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
+          
+          <div class="product-img-wrapper">
+            <svg class="brick-set-svg" viewBox="0 0 160 140">
+              <!-- 太空基地與探測車圖形 -->
+              <circle cx="80" cy="70" r="45" fill="#E8EEF5"/>
+              <path d="M 45 70 Q 80 40 115 70" stroke="#006DB7" stroke-width="4" fill="none"/>
+              <rect x="65" y="75" width="30" height="20" rx="3" fill="#FFD000"/>
+              <circle cx="65" cy="100" r="8" fill="#333333"/>
+              <circle cx="95" cy="100" r="8" fill="#333333"/>
+              <line x1="80" y1="25" x2="80" y2="10" stroke="#E3000B" stroke-width="3"/>
+              <circle cx="80" cy="8" r="4" fill="#E3000B"/>
+            </svg>
+          </div>
+
+          <div class="product-info">
+            <div class="product-meta-tags">
+              <span>8+</span> • <span>560 件顆粒</span>
+            </div>
+            <h3 class="product-name">樂高® 城市：月球科研開拓者前哨站</h3>
+            <div class="product-rating">
+              <span class="stars">★★★★☆</span>
+              <span>(67)</span>
+            </div>
+            <div class="product-price-row">
+              <span class="product-price">NT$ 1,799</span>
+              <button class="btn-add-cart" onclick="addToCart('月球科研前哨站', 1799)">加入購物袋</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-spacing" id="insiders">
+      <div class="insiders-banner">
+        <div class="insiders-left">
+          <h3>
+            加入 LEGO® Insiders
+            <span class="insiders-tag">尊榮會員計劃</span>
+          </h3>
+          <p>
+            每次購物皆可累積點數、解鎖專屬會員折扣、搶先購買熱門限量新品套裝，並可隨時參與全球樂高拼砌愛好者活動！
+          </p>
+        </div>
+        <div>
+          <button class="btn-primary" style="background:#FFD000; color:#202020;" onclick="showToast('歡迎加入 Insiders！即刻享有會員好禮')">
+            免費註冊會員
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-strip">
+      <div class="feature-item">
+        <div class="feature-icon-box">🚚</div>
+        <div>
+          <div class="feature-title">全館滿額享免運</div>
+          <div class="feature-subtitle">單筆滿 NT$1,800 即享全台免運</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-box">🛡️</div>
+        <div>
+          <div class="feature-title">100% 官方正品保證</div>
+          <div class="feature-subtitle">嚴格丹麥品質標準與售後零件保障</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-box">🎁</div>
+        <div>
+          <div class="feature-title">專屬滿額好禮</div>
+          <div class="feature-subtitle">隨訂單不定期獲贈限量收藏積木</div>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon-box">💬</div>
+        <div>
+          <div class="feature-title">安心退換與支援</div>
+          <div class="feature-subtitle">享有 14 天商品猶豫期與友善諮詢</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-columns">
+        <div class="footer-brand">
+          <h4>LEGO® 台灣線上商店復刻版</h4>
+          <p>
+            激發未來拼砌者的創造力。本頁面為網頁前端樣板復刻展示，包含可隨意擴充調整的模組化 HTML 與 CSS 代碼。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h5>探索系列</h5>
+          <ul>
+            <li><a href="#">新品上市專區</a></li>
+            <li><a href="#">成人玩家系列 (18+)</a></li>
+            <li><a href="#">建築與城市系列</a></li>
+            <li><a href="#">即將停產熱門套裝</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>顧客服務</h5>
+          <ul>
+            <li><a href="#">聯絡我們</a></li>
+            <li><a href="#">查詢配送進度</a></li>
+            <li><a href="#">積木零件遺失補發</a></li>
+            <li><a href="#">拼砌說明書下載</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>關於樂高</h5>
+          <ul>
+            <li><a href="#">樂高集團使命</a></li>
+            <li><a href="#">永續發展承諾</a></li>
+            <li><a href="#">LEGO Foundation</a></li>
+            <li><a href="#">授權專賣店據點</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 The LEGO Group. LEGO, the LEGO logo are trademarks of the LEGO Group.
+        </div>
+        <div>
+          隱私權政策 • Cookie 偏好設定 • 使用條款 • 安全資訊
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-box" id="toastMessage">
+    <span>🛒</span>
+    <span id="toastText">商品已成功加入購物袋！</span>
+  </div>
+
+  <script>
+    // 購物車計數器狀態
+    let cartCount = 1;
+    let toastTimeout;
+
+    // 加入購物車功能
+    function addToCart(productName, price) {
+      cartCount++;
+      const counterElement = document.getElementById('cart-counter');
+      if (counterElement) {
+        counterElement.textContent = cartCount;
+      }
+      showToast(`已將「${productName}」(NT$ ${price.toLocaleString()}) 加入購物袋！`);
+    }
+
+    // 愛心收藏切換
+    function toggleFav(btn) {
+      btn.classList.toggle('active');
+      const isFav = btn.classList.contains('active');
+      showToast(isFav ? '已加入您的願望清單 ❤️' : '已從願望清單中移除');
+    }
+
+    // 顯示底部提示訊息 (避免使用阻塞式 alert)
+    function showToast(message) {
+      const toast = document.getElementById('toastMessage');
+      const toastText = document.getElementById('toastText');
+      
+      if (!toast || !toastText) return;
+      
+      toastText.textContent = message;
+      toast.classList.add('show');
+      
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+  </script>
+</body>
+</html>
